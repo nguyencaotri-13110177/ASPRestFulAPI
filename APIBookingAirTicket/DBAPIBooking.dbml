@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="APIBookingAirTicket" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(local);Initial Catalog=APIBookingAirTicket;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="APIBookingAirTicketConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.KeyAPI" Member="KeyAPIs">
+    <Type Name="KeyAPI">
+      <Column Name="KeyID" Type="System.String" DbType="NVarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Loai" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="NgayKichHoat" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NgayKetThuc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DatCho" Member="DatChos">
+    <Type Name="DatCho">
+      <Column Name="Hang" Type="System.String" DbType="NVarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaDatCho" Type="System.String" DbType="NVarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TinhTrangThanhToan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TGChoBatDau" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TGChoKetThuc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Ten" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CMND" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
