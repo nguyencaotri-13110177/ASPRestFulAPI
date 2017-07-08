@@ -19,7 +19,7 @@ namespace APIBookingAirTicket.controller
 
 
         //service giữ chỗ chờ thanh toán, thời gian giữ 60phuts
-        [HttpGet]
+        [HttpPost]
         public bool GiuCho(string key,string hang,string madatcho)
         {           
             //Kiem tra KEY có tồn tai và có phải là loại booking và còn Hạn Sử Dụng
@@ -28,30 +28,29 @@ namespace APIBookingAirTicket.controller
                 return false;
             else               //key thỏa điều kiện
             {
-                DatCho datcho = db.DatChos.FirstOrDefault(x => x.MaDatCho == madatcho && x.Hang == hang);
-                if (datcho == null) //DatCho không tồn tại
-                    return false;
-                else if (datcho.TinhTrangThanhToan == 1)//Nếu TinhTrangThanhToan == 1 thì vé đã đặt -> return false
-                    return false;
-                else                               //Tình trạng thanh toán khác 1 -> vé chưa đặt -> set Tình Trạng Thanh Toán Là 1
+                DatCho datcho = new DatCho();
+
+                try
                 {
-                    try
-                    {
-                        datcho.TGChoBatDau = DateTime.Now;
-                        datcho.TGChoKetThuc = DateTime.Now.AddMinutes(60);
-                        db.SubmitChanges();//xác nhận thay đổi
-                        return true;  //Giữ chỗ thành công
-                    }
-                    catch
-                    {
-                        return false;
-                    }
+                    datcho.Hang = hang;
+                    datcho.MaDatCho = madatcho;
+                    datcho.TGChoBatDau = DateTime.Now;
+                    datcho.TGChoKetThuc = DateTime.Now.AddMinutes(60);
+                    datcho.TinhTrangThanhToan = 0;
+                    db.DatChos.InsertOnSubmit(datcho);
+                    db.SubmitChanges();//xác nhận thay đổi
+                    return true;  //Giữ chỗ thành công
                 }
-            }   
+                catch
+                {
+                    return false;
+                }
+
+            }
         }
 
         //service đặt chỗ
-        [HttpGet]
+        [HttpPost]
         public bool DatCho(string key, string hang, string madatcho,string ten,int cmnd)
         {
 
